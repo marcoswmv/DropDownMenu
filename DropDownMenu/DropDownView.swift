@@ -64,17 +64,17 @@ struct DropDownMenu: View {
             
             Group{
                 HStack {
-                    Image(systemName: "person.badge.plus")
+                    Image("add-user")
                         .foregroundColor(.blue)
-                        .font(.system(size: 16))
+//                        .font(.system(size: 16))
                     Button("Invite members") { }
                         .font(.system(size: 14))
                 }
                 
                 HStack {
-                    Image(systemName: "slider.horizontal.3")
+                    Image("manage")
                         .foregroundColor(.blue)
-                        .font(.system(size: 16))
+//                        .font(.system(size: 16))
                     Button("Manage workspace") { }
                         .font(.system(size: 14))
                 }
@@ -98,10 +98,10 @@ struct DropDownMenu: View {
                 .padding(.leading, 26)
             
             HStack {
-                Image(systemName: "plus")
+                Image("new-workspace")
                     .foregroundColor(.blue)
-                    .font(.system(size: 16))
-                Button("New workspace") { }
+//                    .font(.system(size: 16))
+                Button(" New workspace") { }
                     .font(.system(size: 14))
             }
         }
