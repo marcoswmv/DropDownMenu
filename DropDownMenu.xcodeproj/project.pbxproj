@@ -11,6 +11,7 @@
 		F7F7189F256519C100A573D4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F7189E256519C100A573D4 /* ContentView.swift */; };
 		F7F718A1256519C300A573D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7F718A0256519C300A573D4 /* Assets.xcassets */; };
 		F7F718A4256519C300A573D4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7F718A3256519C300A573D4 /* Preview Assets.xcassets */; };
+		F7F718AD25652DD400A573D4 /* DropDownView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7F718AC25652DD400A573D4 /* DropDownView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +21,7 @@
 		F7F718A0256519C300A573D4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F7F718A3256519C300A573D4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F7F718A5256519C300A573D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7F718AC25652DD400A573D4 /* DropDownView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +56,7 @@
 			children = (
 				F7F7189C256519C100A573D4 /* DropDownMenuApp.swift */,
 				F7F7189E256519C100A573D4 /* ContentView.swift */,
+				F7F718AC25652DD400A573D4 /* DropDownView.swift */,
 				F7F718A0256519C300A573D4 /* Assets.xcassets */,
 				F7F718A5256519C300A573D4 /* Info.plist */,
 				F7F718A2256519C300A573D4 /* Preview Content */,
@@ -140,6 +143,7 @@
 			files = (
 				F7F7189F256519C100A573D4 /* ContentView.swift in Sources */,
 				F7F7189D256519C100A573D4 /* DropDownMenuApp.swift in Sources */,
+				F7F718AD25652DD400A573D4 /* DropDownView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
