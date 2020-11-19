@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isSelected: Bool = false
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {
+            DropDownView(title: "Select a workspace",
+                         menuActions: [.init(title: "Komitet", action: {}),
+                                       .init(title: "iOS Developers", action: {}),
+                                       .init(title: "Killers", action: {}),
+                                       .init(title: "A Big workspace name", action: {})])
+                .padding(100)
+            Spacer()
+        }
     }
 }
 
