@@ -7,16 +7,19 @@
 
 import SwiftUI
 
+
 struct DropDownAction: Equatable, Identifiable {
     
     var id: UUID? = UUID()
     var title: String
-    var action: () -> () = {
-        print("An action was called")
-    }
     
     static func == (lhs: DropDownAction, rhs: DropDownAction) -> Bool {
-        return lhs.title == rhs.title && lhs.action() == rhs.action()
+        return lhs.title == rhs.title
+    }
+    
+    func select() {
+//        Select channel
+        print("Selecting")
     }
 }
 
@@ -56,7 +59,7 @@ struct DropDownMenu: View {
     @Binding var selectionKeeper: UUID?
     
     var menuActions: [DropDownAction]
-    var select: (DropDownAction) -> ()
+    var selectMenuItem: (DropDownAction) -> ()
     
     var body: some View {
         
@@ -66,7 +69,6 @@ struct DropDownMenu: View {
                 HStack {
                     Image("add-user")
                         .foregroundColor(.blue)
-//                        .font(.system(size: 16))
                     Button("Invite members") { }
                         .font(.system(size: 14))
                 }
@@ -74,7 +76,6 @@ struct DropDownMenu: View {
                 HStack {
                     Image("manage")
                         .foregroundColor(.blue)
-//                        .font(.system(size: 16))
                     Button("Manage workspace") { }
                         .font(.system(size: 14))
                 }
@@ -86,10 +87,9 @@ struct DropDownMenu: View {
             ForEach(menuActions, id: \.id) { action in
                 
                 HStack {
-                    DropDownButton(selectionKeeper: $selectionKeeper, actionModel: action, select: select)
+                    DropDownButton(selectionKeeper: $selectionKeeper, actionModel: action, select: selectMenuItem)
                 }
                 .onTapGesture {
-                    print("Selecting button")
                     selectionKeeper = action.id
                 }
             }
@@ -100,12 +100,10 @@ struct DropDownMenu: View {
             HStack {
                 Image("new-workspace")
                     .foregroundColor(.blue)
-//                    .font(.system(size: 16))
                 Button(" New workspace") { }
                     .font(.system(size: 14))
             }
         }
-//        .fixedSize(horizontal: true, vertical: true)
         .frame(width: 180, alignment: .center)
         .foregroundColor(.black)
         .padding(10)
@@ -122,26 +120,32 @@ struct DropDownHeader: View {
     var expand: Bool
     
     var body: some View {
-        Button(action: action, label: {
-            HStack {
-                Image("avatar")
-                
-                Text(title + " ")
-                
-                Image(systemName: "chevron.\(expand ? "up" : "down")")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 10)
-                    .foregroundColor(.blue)
-            }
-            .padding(10)
-        })
-        .font(.system(size: 14))
-        .frame(width: 150, alignment: .center)
-        .foregroundColor(.black)
-        .background(Color(.systemGroupedBackground))
-        .cornerRadius(10)
-        .shadow(radius: 7)
+        HStack {
+            Button(action: action, label: {
+                HStack {
+                    Image("avatar")
+                    
+                    Text(title + " ")
+                        .foregroundColor(.black)
+                    
+                    Image(systemName: "chevron.\(expand ? "up" : "down")")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 10)
+                        .foregroundColor(.blue)
+                }
+                .padding(10)
+            })
+    //        .font(.system(size: 14))
+    //        .frame(width: 140, alignment: .center)
+            
+            .background(Color(.white))
+            .cornerRadius(10)
+            .shadow(radius: 7)
+            
+//            Spacer(minLength: 100)
+//                .frame(maxWidth: .infinity)
+        }
     }
 }
 
@@ -156,19 +160,31 @@ struct DropDownView: View {
     var body: some View {
         
         VStack(alignment: .leading) {
+            Spacer(minLength: expand ? 250 : 0)
             DropDownHeader(title: title,
                            action: { self.expand.toggle() },
                            expand: expand)
             
-            if expand {
-                DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
-                    action.action()
-                    $title.wrappedValue = action.title
-                    self.selectionKeeper = action.id
-                    self.expand = false
-                }
-            }
+//            if expand {
+//                DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
+//                    action.select()
+//                    $title.wrappedValue = action.title
+//                    self.selectionKeeper = action.id
+//                    self.expand = false
+//                }
+//            }
         }
+//        NOTE: Uncomment below line to add animation
 //        .animation(.easeInOut)
+    }
+}
+
+struct DropDownView_Previews: PreviewProvider {
+    static var previews: some View {
+        DropDownView(title: "Select a workspace",
+                     menuActions: [.init(title: "Komitet"),
+                                   .init(title: "iOS Developers"),
+                                   .init(title: "Killers"),
+                                   .init(title: "A Big workspace name")])
     }
 }
