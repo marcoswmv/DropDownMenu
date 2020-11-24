@@ -84,15 +84,18 @@ struct DropDownMenu: View {
             Divider()
                 .padding(.leading, 26)
             
-            ForEach(menuActions, id: \.id) { action in
-                
-                HStack {
-                    DropDownButton(selectionKeeper: $selectionKeeper, actionModel: action, select: selectMenuItem)
-                }
-                .onTapGesture {
-                    selectionKeeper = action.id
+            ScrollView {
+                ForEach(menuActions, id: \.id) { action in
+                    
+                    HStack {
+                        DropDownButton(selectionKeeper: $selectionKeeper, actionModel: action, select: selectMenuItem)
+                    }
+                    .onTapGesture {
+                        selectionKeeper = action.id
+                    }
                 }
             }
+            .frame(height: 80)
             
             Divider()
                 .padding(.leading, 26)
@@ -120,7 +123,7 @@ struct DropDownHeader: View {
     var expand: Bool
     
     var body: some View {
-        HStack {
+//        HStack {
             Button(action: action, label: {
                 HStack {
                     Image("avatar")
@@ -134,18 +137,20 @@ struct DropDownHeader: View {
                         .frame(width: 10)
                         .foregroundColor(.blue)
                 }
-                .padding(10)
+                .padding(.top, 10)
+                .padding(.trailing, 10)
+                .padding(.bottom, 10)
             })
     //        .font(.system(size: 14))
     //        .frame(width: 140, alignment: .center)
             
-            .background(Color(.white))
-            .cornerRadius(10)
-            .shadow(radius: 7)
+//            .background(Color(.white))
+//            .cornerRadius(10)
+//            .shadow(radius: 7)
             
 //            Spacer(minLength: 100)
 //                .frame(maxWidth: .infinity)
-        }
+//        }
     }
 }
 
@@ -165,26 +170,26 @@ struct DropDownView: View {
                            action: { self.expand.toggle() },
                            expand: expand)
             
-//            if expand {
-//                DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
-//                    action.select()
-//                    $title.wrappedValue = action.title
-//                    self.selectionKeeper = action.id
-//                    self.expand = false
-//                }
-//            }
+            if expand {
+                DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
+                    action.select()
+                    $title.wrappedValue = action.title
+                    self.selectionKeeper = action.id
+                    self.expand = false
+                }
+            }
         }
 //        NOTE: Uncomment below line to add animation
 //        .animation(.easeInOut)
     }
 }
 
-struct DropDownView_Previews: PreviewProvider {
-    static var previews: some View {
-        DropDownView(title: "Select a workspace",
-                     menuActions: [.init(title: "Komitet"),
-                                   .init(title: "iOS Developers"),
-                                   .init(title: "Killers"),
-                                   .init(title: "A Big workspace name")])
-    }
-}
+//struct DropDownView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DropDownView(title: "Select a workspace",
+//                     menuActions: [.init(title: "Komitet"),
+//                                   .init(title: "iOS Developers"),
+//                                   .init(title: "Killers"),
+//                                   .init(title: "A Big workspace name")])
+//    }
+//}

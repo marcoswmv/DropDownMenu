@@ -16,53 +16,50 @@ struct ContentView: View {
     var menuActions: [DropDownAction] = [.init(title: "Komitet"),
                                          .init(title: "iOS Developers"),
                                          .init(title: "Killers"),
+                                         .init(title: "Killers"),
                                          .init(title: "A Big workspace name")]
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                List(0 ..< 10) { _ in
-                    Text("Test")
-                }
-                if expand {
-                    VStack(alignment: .leading) {
-                        DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
-                            action.select()
-                            $title.wrappedValue = action.title
-                            self.selectionKeeper = action.id
-                            self.expand = false
-                        }
-                        .offset(x: -78,y: -255)
+        GeometryReader { geo in
+            NavigationView {
+                ZStack(alignment: .topLeading) {
+                    List(0 ..< 10) { _ in
+                        Text("Test")
+                    }
+                    if expand {
+                            DropDownMenu(selectionKeeper: $selectionKeeper, menuActions: menuActions) { action in
+                                action.select()
+                                $title.wrappedValue = action.title
+                                self.selectionKeeper = action.id
+                                self.expand = false
+                            }
+                            .padding([.top, .leading], 8)
                     }
                 }
-            }
-//            .navigationBarItems(leading: DropDownHeader(title: title,
-//                                                         action: { self.expand.toggle() },
-//                                                         expand: expand),
-//                                trailing: Spacer(minLength: 260))
-            .navigationBarItems(leading:
-                                    HStack {
-//                                        VStack(alignment: .leading) {
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarItems(leading:
+                                        HStack {
                                             DropDownHeader(title: title,
                                                            action: { self.expand.toggle() },
                                                            expand: expand)
-                                                .padding(.leading, -5)
-//                                        }
-//                                        Spacer(minLength: 120)
-//                                            .frame(maxWidth: .infinity)
-                                    }
-//                                        VStack {
-//                                            DropDownView(title: title,
-//                                                         menuActions: menuActions)
-//                                                .padding(.vertical, 100)
-//                                        }
-                )
+                                                .frame(minWidth: 240, alignment: .leading)
+                                        }
+                                    , trailing:
+                                        Button("Test") { print("I'm just being tested") }
+                    )
+            }
+            .navigationViewStyle(StackNavigationViewStyle())
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        Group {
+            ContentView()
+                .previewDevice("iPhone 12")
+            ContentView()
+                .previewDevice("iPhone SE (1st generation)")
+        }
     }
 }
